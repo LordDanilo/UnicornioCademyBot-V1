@@ -1,0 +1,17 @@
+{
+  "name": "unicorniocademybot-v1",
+  "version": "1.0.0",
+  "description": "Conversational bot engine built with TypeScript and Node.js, focused on state-based flows and scalable chatbot solutions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
