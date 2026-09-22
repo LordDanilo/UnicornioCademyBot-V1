@@ -1,0 +1,64 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UnicornioCAdemy Bot</title>
+
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header class="header">
+
+      <div class="brand">
+        <div class="logo">🦄</div>
+
+        <div>
+          <h1>UnicornioCAdemy Bot</h1>
+          <span class="status">
+            <span class="status-dot"></span>
+            Online
+          </span>
+        </div>
+      </div>
+
+    </header>
+
+    <section
+      id="chat"
+      class="chat"
+      aria-live="polite">
+    </section>
+
+    <div class="quick-actions" id="quickActions"></div>
+
+    <form id="messageForm" class="input-area">
+
+      <input
+        id="messageInput"
+        type="text"
+        placeholder="Escribe una opción..."
+        autocomplete="off"
+      >
+
+      <button type="submit">
+        Enviar
+      </button>
+
+    </form>
+
+  </main>
+
+  <script src="./app.js"></script>
+
+</body>
+
+</html>
+```

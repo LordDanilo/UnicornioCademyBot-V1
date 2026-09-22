@@ -1,0 +1,6 @@
+export enum State {
+  MAIN_MENU = "MAIN_MENU",
+  COURSES = "COURSES",
+  COURSE_DETAIL = "COURSE_DETAIL",
+  CONTACT = "CONTACT"
+}
