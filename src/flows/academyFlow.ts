@@ -1,6 +1,17 @@
 import { ConversationNode } from "../bot/ConversationNode.js";
+import { Context } from "../bot/Context.js";
 import { State } from "../bot/State.js";
 import { courses } from "../data/courses.js";
+
+const courseTransitions = courses.map((course, index) => ({
+  input: String(index + 1),
+
+  nextState: State.COURSE_DETAIL,
+
+  action: (context: Context) => {
+    context.selectedCourseId = course.id;
+  }
+}));
 
 export const academyFlow: ConversationNode[] = [
 
@@ -50,9 +61,43 @@ ${courseList}
     },
 
     transitions: [
+      ...courseTransitions,
+
       {
         input: "0",
         nextState: State.MAIN_MENU
+      }
+    ]
+  },
+
+  {
+    state: State.COURSE_DETAIL,
+
+    message: (context) => {
+
+      const course = courses.find(
+        course => course.id === context.selectedCourseId
+      );
+
+      if (!course) {
+        return "❌ No se encontró el curso.";
+      }
+
+      return `
+📚 ${course.name}
+
+${course.description}
+
+⏱️ Duración: ${course.duration}
+
+1️⃣ Volver a cursos
+`;
+    },
+
+    transitions: [
+      {
+        input: "1",
+        nextState: State.COURSES
       }
     ]
   },

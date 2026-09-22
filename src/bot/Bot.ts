@@ -1,3 +1,4 @@
+import { Context } from "./Context.js";
 import { ConversationNode } from "./ConversationNode.js";
 import { State } from "./State.js";
 
@@ -5,6 +6,7 @@ export class Bot {
 
   private currentState: State;
   private nodes: ConversationNode[];
+  private context: Context;
 
   constructor(
     nodes: ConversationNode[],
@@ -12,6 +14,7 @@ export class Bot {
   ) {
     this.nodes = nodes;
     this.currentState = initialState;
+    this.context = {};
   }
 
   getCurrentNode(): ConversationNode | undefined {
@@ -37,6 +40,10 @@ export class Bot {
       return "🤔 No entendí tu opción.";
     }
 
+    if (transition.action) {
+      transition.action(this.context);
+    }
+
     this.currentState = transition.nextState;
 
     const nextNode = this.getCurrentNode();
@@ -46,7 +53,7 @@ export class Bot {
     }
 
     return typeof nextNode.message === "function"
-      ? nextNode.message()
+      ? nextNode.message(this.context)
       : nextNode.message;
   }
 
@@ -59,7 +66,15 @@ export class Bot {
     }
 
     return typeof node.message === "function"
-      ? node.message()
+      ? node.message(this.context)
       : node.message;
+  }
+
+  setContext(key: keyof Context, value: string): void {
+    this.context[key] = value;
+  }
+
+  getContext(): Context {
+    return this.context;
   }
 }
